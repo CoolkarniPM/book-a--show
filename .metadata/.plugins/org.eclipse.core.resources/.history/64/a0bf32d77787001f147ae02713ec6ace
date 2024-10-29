@@ -1,0 +1,18 @@
+package com.eventmanagement.service;
+
+
+import java.util.List;
+
+public interface EventService {
+
+    Event createEvent(Event event);
+
+    Event updateEvent(Long eventId, Event eventDetails);
+
+    void deleteEvent(Long eventId);
+
+    Event getEventById(Long eventId);
+
+    List<Event> getAllEvents();
+}
+

@@ -1,0 +1,5 @@
+package com.bookingmanagement.repo;
+
+public interface BookingRepo {
+
+}

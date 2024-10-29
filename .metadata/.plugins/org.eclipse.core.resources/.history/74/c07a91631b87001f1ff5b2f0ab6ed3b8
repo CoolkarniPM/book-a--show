@@ -1,0 +1,5 @@
+package com.usermanagement.payloads;
+
+public class UserDTO {
+
+}

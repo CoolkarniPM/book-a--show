@@ -1,0 +1,16 @@
+package com.ticketbooksystem.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.ticketbooksystem.entity.Event;
+import com.ticketbooksystem.entity.Show;
+
+public interface ShowRepository extends JpaRepository<Show, Long> {
+
+	List<Show> findByEvent(Event event);
+
+	List<Show> findShowsByCriteria(String criteria);
+
+}

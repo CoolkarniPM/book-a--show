@@ -1,0 +1,49 @@
+package com.ticketBooking.service.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.ticketBooking.entity.Event;
+import com.ticketBooking.repo.EventRepo;
+import com.ticketBooking.service.EventService;
+
+public class EventServiceImpl implements EventService {
+	
+	@Autowired
+	EventRepo eventRepo;
+
+	@Override
+	public Event createEvent(Event event) {
+		
+		return null;
+	}
+
+	@Override
+	public Event getEventById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Event updateEvent(Long id, Event event) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteEvent(Long id) {
+		this.eventRepo.deleteById(id);
+		
+	}
+
+	@Override
+	public List<Event> getAllEvents() {
+		
+		
+		return this.eventRepo.findAll();
+	}
+
+	
+	
+}

@@ -1,0 +1,8 @@
+spring.application.name=Ticketbooking
+
+spring.datasource.url=jdbc:mysql://localhost:3306/bookashow
+spring.datasource.username=root
+spring.datasource.password=root@123
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+

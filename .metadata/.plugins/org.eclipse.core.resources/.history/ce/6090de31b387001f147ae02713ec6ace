@@ -1,0 +1,33 @@
+package com.paymentmanagement.entity;
+
+
+import lombok.*;
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Entity;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Payment {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private Long bookingId; // Corresponding booking ID
+
+    @Column(nullable = false)
+    private Long userId; // ID of the user making the payment
+
+    @Column(nullable = false)
+    private double amount;
+
+    @Column(nullable = false)
+    private String paymentStatus; // SUCCESS, FAILED, PENDING
+
+    @Column(nullable = false)
+    private LocalDateTime paymentTime;
+}

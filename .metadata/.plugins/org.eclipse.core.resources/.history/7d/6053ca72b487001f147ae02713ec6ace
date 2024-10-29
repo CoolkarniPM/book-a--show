@@ -1,0 +1,48 @@
+package com.paymentmanagement.serviceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
+
+@Service
+public class PaymentServiceImpl implements PaymentService {
+
+    @Autowired
+    private PaymentRepository paymentRepository;
+
+    @Autowired
+    private TransactionRepository transactionRepository;
+
+    @Override
+    public Payment processPayment(Long bookingId, Long userId, double amount) {
+        // Mock payment processing logic
+
+        Payment payment = new Payment();
+        payment.setBookingId(bookingId);
+        payment.setUserId(userId);
+        payment.setAmount(amount);
+        payment.setPaymentStatus("SUCCESS");
+        payment.setPaymentTime(LocalDateTime.now());
+
+        // Save the payment
+        payment = paymentRepository.save(payment);
+
+        // Mock transaction (can be replaced with actual payment gateway logic)
+        Transaction transaction = new Transaction();
+        transaction.setTransactionId("TRANS_" + System.currentTimeMillis()); // Generate mock transaction ID
+        transaction.setPaymentId(payment.getId());
+        transaction.setTransactionStatus("SUCCESS");
+        transaction.setPaymentGateway("MockGateway");
+        transaction.setTransactionTime(LocalDateTime.now());
+
+        transactionRepository.save(transaction);
+
+        return payment;
+    }
+
+    @Override
+    public Payment getPaymentByBooking(Long bookingId) {
+        return paymentRepository.findByBookingId(bookingId);
+    }
+}
+

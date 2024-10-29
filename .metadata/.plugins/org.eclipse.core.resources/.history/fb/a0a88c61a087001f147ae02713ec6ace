@@ -1,0 +1,44 @@
+package com.bookingmanagement.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.bookingmanagement.entity.Booking;
+import com.bookingmanagement.service.BookingService;
+
+@RestController
+@RequestMapping("/bookings")
+public class BookingController {
+
+    @Autowired
+    private BookingService bookingService;
+
+    @PostMapping
+    public Booking createBooking(
+        @RequestParam Long userId, 
+        @RequestParam Long showId, 
+        @RequestParam int numberOfSeats, 
+        @RequestBody List<String> seatNumbers) {
+        return bookingService.createBooking(userId, showId, numberOfSeats, seatNumbers);
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<Booking> getBookingsByUser(@PathVariable Long userId) {
+        return bookingService.getBookingsByUser(userId);
+    }
+
+    @DeleteMapping("/{bookingId}")
+    public void cancelBooking(@PathVariable Long bookingId) {
+        bookingService.cancelBooking(bookingId);
+    }
+}
+

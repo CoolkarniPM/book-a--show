@@ -1,0 +1,5 @@
+package com.paymentmanagement.feign;
+
+public interface feign {
+
+}

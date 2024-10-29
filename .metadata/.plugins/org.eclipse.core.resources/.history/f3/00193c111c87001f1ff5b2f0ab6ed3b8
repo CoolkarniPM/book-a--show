@@ -1,0 +1,7 @@
+package com.usermanagement.payloads;
+@Data
+@AllArgsConstructor
+public class AuthenticationResponse {
+    private String jwt;
+}
+

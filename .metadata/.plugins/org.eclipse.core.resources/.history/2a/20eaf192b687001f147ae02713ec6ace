@@ -1,0 +1,5 @@
+package com.bookingmanagement.service;
+
+public interface abc {
+
+}

@@ -1,0 +1,12 @@
+package com.usermanagement.service;
+
+import com.usermanagement.payloads.UserDTO;
+
+public class UserService {
+
+	public void registerUser(UserDTO userDTO) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

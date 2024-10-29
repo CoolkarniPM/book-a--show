@@ -1,0 +1,5 @@
+package com.UserandRoleRepositories;
+
+public interface Role {
+
+}

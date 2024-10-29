@@ -1,0 +1,9 @@
+package service.impl;
+
+import com.ticketBooking.service.EventService;
+
+public class EventServiceImpl implements EventService {
+
+	
+	
+}

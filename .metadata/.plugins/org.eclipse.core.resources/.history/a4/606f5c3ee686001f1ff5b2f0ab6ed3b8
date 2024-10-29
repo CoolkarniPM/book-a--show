@@ -1,0 +1,5 @@
+package com.ticketbooksystem.entity;
+
+public class movieHall {
+
+}

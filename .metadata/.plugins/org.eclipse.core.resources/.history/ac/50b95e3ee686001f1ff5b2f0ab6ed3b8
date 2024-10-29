@@ -1,0 +1,19 @@
+package com.ticketbooksystem.entity;
+
+import jakarta.persistence.Entity;
+
+@Entity
+public class MovieHall {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String location;
+
+    @OneToMany(mappedBy = "movieHall", cascade = CascadeType.ALL)
+    private List<Show> shows;
+
+    // Getters and Setters
+}
+

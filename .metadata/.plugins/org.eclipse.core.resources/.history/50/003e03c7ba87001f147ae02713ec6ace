@@ -1,0 +1,82 @@
+package com.bookingmanagement.serviceImpl;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.bookingmanagement.entity.Booking;
+import com.bookingmanagement.entity.Payment;
+import com.bookingmanagement.entity.Seat;
+import com.bookingmanagement.repo.BookingRepository;
+import com.bookingmanagement.repo.SeatRepository;
+import com.bookingmanagement.service.BookingService;
+import com.bookingmanagement.service.PaymentClient;
+
+@Service
+public class BookingServiceImpl implements BookingService {
+
+    @Autowired
+    private BookingRepository bookingRepository;
+
+    @Autowired
+    private SeatRepository seatRepository;
+
+    @Autowired
+    private PaymentClient paymentClient;
+
+    @Override
+    public Booking createBooking(Long userId, Long showId, int numberOfSeats, List<String> seatNumbers) {
+        Booking booking = new Booking();
+        booking.setUserId(userId);
+        booking.setShowId(showId);
+        booking.setBookingTime(LocalDateTime.now());
+        booking.setNumberOfSeats(numberOfSeats);
+        booking.setTotalPrice(calculatePrice(numberOfSeats));
+        booking.setStatus("PENDING");
+
+        // Save the booking first to get the ID
+        booking = bookingRepository.save(booking);
+        
+        
+        for(String a:seatNumbers) {
+        	Seat seat = new Seat();
+        	
+        	
+        }
+
+        // Trigger payment
+        Payment payment = paymentClient.processPayment(booking.getId(), userId, booking.getTotalPrice());
+        
+        if (payment.getPaymentStatus().equals("SUCCESS")) {
+            booking.setStatus("CONFIRMED");
+        } else {
+            booking.setStatus("FAILED");
+        }
+
+        // Save updated booking status
+        return bookingRepository.save(booking);
+    }
+
+    
+    @Override
+    public List<Booking> getBookingsByUser(Long userId) {
+        return bookingRepository.findByUserId(userId);
+    }
+
+    @Override
+    public void cancelBooking(Long bookingId) {
+        Booking booking = bookingRepository.findById(bookingId)
+            .orElseThrow(() -> new RuntimeException("Booking not found"));
+        booking.setStatus("CANCELLED");
+        bookingRepository.save(booking);
+    }
+
+    private double calculatePrice(int numberOfSeats) {
+        // Price calculation logic can go here
+        return numberOfSeats * 10.0; // Example: $10 per seat
+    }
+}
+

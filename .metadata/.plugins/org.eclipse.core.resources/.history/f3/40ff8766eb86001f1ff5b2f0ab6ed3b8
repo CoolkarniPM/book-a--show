@@ -1,0 +1,5 @@
+package com.ticketbooksystem.service;
+
+public interface ShowService {
+
+}

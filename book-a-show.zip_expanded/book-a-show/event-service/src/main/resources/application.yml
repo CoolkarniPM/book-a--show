@@ -1,0 +1,24 @@
+# event-service/src/main/resources/application.yml
+server:
+  port: 8082
+
+spring:
+  application:
+    name: event-service
+  datasource:
+    url: jdbc:mysql://mysql:3306/eventdb
+    username: root
+    password: rootpassword
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery-service:8761/eureka/
+
+jwt:
+  secret: your_event_service_secret_key_here
+  expiration: 3600000 # 1 hour in milliseconds

@@ -1,0 +1,15 @@
+package com.paymentmanagement.feign;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.paymentmanagement.entity.Payment;
+
+@FeignClient(name = "payment-service", url = "http://localhost:8082/payments")
+public interface PaymentClient {
+
+    @PostMapping
+    Payment processPayment(@RequestParam Long bookingId, @RequestParam Long userId, @RequestParam double amount);
+}
+

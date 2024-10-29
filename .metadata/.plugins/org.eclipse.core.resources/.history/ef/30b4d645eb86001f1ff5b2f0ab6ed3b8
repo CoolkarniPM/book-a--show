@@ -1,0 +1,30 @@
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ticketbooksystem.entity.Show;
+import com.ticketbooksystem.exception.ResourceNotFoundException;
+
+@Service
+public class ShowServiceImpl {
+
+    @Autowired
+    private ShowRepository showRepository;
+
+    public int getAvailableTickets(Long showId) {
+        Show show = showRepository.findById(showId)
+            .orElseThrow(() -> new ResourceNotFoundException("Show not found"));
+        return show.getAvailableTickets();
+    }
+
+    public boolean bookTickets(Long showId, int count) {
+        Show show = showRepository.findById(showId)
+            .orElseThrow(() -> new ResourceNotFoundException("Show not found"));
+        if (show.getAvailableTickets() >= count) {
+            show.setAvailableTickets(show.getAvailableTickets() - count);
+            showRepository.save(show);
+            return true;
+        } else {
+            return false;
+        }
+    }
+}

@@ -1,0 +1,61 @@
+package com.bookingmanagement.serviceImpl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.time.LocalDateTime;
+import java.util.List;
+
+@Service
+public class BookingServiceImpl implements BookingService {
+
+    @Autowired
+    private BookingRepository bookingRepository;
+
+    @Autowired
+    private SeatRepository seatRepository;
+
+    @Override
+    public Booking createBooking(Long userId, Long showId, int numberOfSeats, List<String> seatNumbers) {
+        // Create a new booking
+        Booking booking = new Booking();
+        booking.setUserId(userId);
+        booking.setShowId(showId);
+        booking.setBookingTime(LocalDateTime.now());
+        booking.setNumberOfSeats(numberOfSeats);
+        booking.setTotalPrice(calculatePrice(numberOfSeats)); // Custom logic for price calculation
+        booking.setStatus("CONFIRMED");
+
+        // Save the booking to generate the ID
+        booking = bookingRepository.save(booking);
+
+        // Assign the selected seats to the booking
+        for (String seatNumber : seatNumbers) {
+            Seat seat = new Seat();
+            seat.setSeatNumber(seatNumber);
+            seat.setBooked(true);
+            seat.setBooking(booking);
+            seatRepository.save(seat);
+        }
+
+        return booking;
+    }
+
+    @Override
+    public List<Booking> getBookingsByUser(Long userId) {
+        return bookingRepository.findByUserId(userId);
+    }
+
+    @Override
+    public void cancelBooking(Long bookingId) {
+        Booking booking = bookingRepository.findById(bookingId)
+            .orElseThrow(() -> new RuntimeException("Booking not found"));
+        booking.setStatus("CANCELLED");
+        bookingRepository.save(booking);
+    }
+
+    private double calculatePrice(int numberOfSeats) {
+        // Price calculation logic can go here
+        return numberOfSeats * 10.0; // Example: $10 per seat
+    }
+}
+

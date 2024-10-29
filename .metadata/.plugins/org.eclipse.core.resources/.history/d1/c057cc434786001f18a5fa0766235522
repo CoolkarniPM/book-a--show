@@ -1,0 +1,5 @@
+package com.ticketBooking.repo;
+
+public interface EventRepo {
+
+}

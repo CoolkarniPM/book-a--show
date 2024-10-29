@@ -1,0 +1,39 @@
+package com.paymentmanagement.entity;
+
+
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Transaction {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(nullable = false)
+    private String transactionId; // Transaction ID from payment gateway
+
+    @Column(nullable = false)
+    private Long paymentId; // Corresponding payment ID
+
+    @Column(nullable = false)
+    private String transactionStatus; // SUCCESS, FAILURE
+
+    @Column(nullable = false)
+    private String paymentGateway; // Gateway name (e.g., Stripe, PayPal)
+
+    @Column(nullable = false)
+    private LocalDateTime transactionTime;
+}

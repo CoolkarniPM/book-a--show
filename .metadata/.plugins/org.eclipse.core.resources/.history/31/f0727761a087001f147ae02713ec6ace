@@ -1,0 +1,33 @@
+package com.bookingmanagement.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+@RestController
+@RequestMapping("/bookings")
+public class BookingController {
+
+    @Autowired
+    private BookingService bookingService;
+
+    @PostMapping
+    public Booking createBooking(
+        @RequestParam Long userId, 
+        @RequestParam Long showId, 
+        @RequestParam int numberOfSeats, 
+        @RequestBody List<String> seatNumbers) {
+        return bookingService.createBooking(userId, showId, numberOfSeats, seatNumbers);
+    }
+
+    @GetMapping("/user/{userId}")
+    public List<Booking> getBookingsByUser(@PathVariable Long userId) {
+        return bookingService.getBookingsByUser(userId);
+    }
+
+    @DeleteMapping("/{bookingId}")
+    public void cancelBooking(@PathVariable Long bookingId) {
+        bookingService.cancelBooking(bookingId);
+    }
+}
+

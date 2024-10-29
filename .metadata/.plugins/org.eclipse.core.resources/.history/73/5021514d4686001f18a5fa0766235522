@@ -1,0 +1,43 @@
+package service.impl;
+
+import java.util.List;
+
+import com.ticketBooking.main.Event;
+import com.ticketBooking.service.EventService;
+
+public class EventServiceImpl implements EventService {
+
+	@Override
+	public Event createEvent(Event event) {
+		
+		return null;
+	}
+
+	@Override
+	public Event getEventById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Event updateEvent(Long id, Event event) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteEvent(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Event> getAllEvents() {
+		
+		
+		return null;
+	}
+
+	
+	
+}

@@ -1,0 +1,5 @@
+package com.paymentmanagement.repo;
+
+public interface repo {
+
+}

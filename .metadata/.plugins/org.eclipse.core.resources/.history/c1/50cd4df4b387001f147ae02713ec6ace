@@ -1,0 +1,9 @@
+package com.paymentmanagement.service;
+
+import java.util.List;
+
+public interface PaymentService {
+    Payment processPayment(Long bookingId, Long userId, double amount);
+    Payment getPaymentByBooking(Long bookingId);
+}
+

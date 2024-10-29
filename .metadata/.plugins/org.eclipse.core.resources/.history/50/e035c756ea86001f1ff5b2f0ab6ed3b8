@@ -1,0 +1,5 @@
+package com.ticketbooksystem.exception;
+
+public class ResourceNotFoundException {
+
+}
